@@ -14,13 +14,13 @@ import qualified Data.ByteString.Base16 as B
 import qualified Data.List as L
 
 data Block = Block {
-    index :: Int
-  , timestamp :: String
-  , prevHash :: String
-  , puzzle :: String
-  , transactions :: String
-  , nonce :: Int
-  , hash :: String
+    index :: !Int
+  , timestamp :: !String
+  , prevHash :: !String
+  , puzzle :: !String
+  , transactions :: !String
+  , nonce :: !Int
+  , hash :: !String
 } deriving (Show)
 
 type BlockChain = [Block]
@@ -79,7 +79,7 @@ askForBlock chain = do
   start <- getCurrentTime
   let chain' = mineBlock chain time transactions puzzle
       (current:_) = chain'
-  putStrLn $ "New block generated with hash: " ++ hash current
+  putStrLn $ "New block generated with index: " ++ (show $ index current)
   end <- getCurrentTime
   putStrLn $ "Eval time: " ++ (show $ diffUTCTime end start)
 
